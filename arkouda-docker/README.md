@@ -8,20 +8,23 @@ The arkouda-full-stack image starts a one-locale arkouda_server and provides an 
 
 ```
 # set env variables
-ARKOUDA_BRANCH_NAME=2022.10.13
-ARKOUDA_DISTRO_NAME=v2022.10.13
-ARKOUDA_DOWNLOAD_URL=https://github.com/Bears-R-Us/arkouda/archive/refs/tags/v2022.10.13.zip
+export ARKOUDA_BRANCH_NAME=2022.10.13
+export ARKOUDA_DISTRO_NAME=v2022.10.13
+export ARKOUDA_DOWNLOAD_URL=https://github.com/Bears-R-Us/arkouda/archive/refs/tags/v2022.10.13.zip
+export DOCKER_REPO_NAME=hokiegeek2
 
 docker build --build-arg ARKOUDA_DISTRO_NAME=$ARKOUDA_DISTRO_NAME \
              --build-arg ARKOUDA_DOWNLOAD_URL=$ARKOUDA_DOWNLOAD_URL \
              --build-arg ARKOUDA_BRANCH_NAME=$ARKOUDA_BRANCH_NAME \
-             -f arkouda-full-stack -t hokiegeek2/arkouda-full-stack:$ARKOUDA_DISTRO_NAME .
+             -f arkouda-full-stack -t $DOCKER_REPO_NAME/arkouda-full-stack:$ARKOUDA_DISTRO_NAME .
 ```
 
 ## Running arkouda-full-stack
 
 ```
-docker run -it --rm -p 8888:8888 hokiegeek2/arkouda-full-stack:v20221013
+export DOCKER_REPO_NAME=hokiegeek2
+
+docker run -it --rm -p 8888:8888 $DOCKER_REPO_NAME/arkouda-full-stack:v20221013
 ```
 
 # arkouda-smp-server
@@ -36,17 +39,20 @@ The arkouda-smp-server extends chapel-gasnet-smp to deliver a GASNET smp configu
 export ARKOUDA_DISTRO_NAME=v2022.10.13
 export ARKOUDA_DOWNLOAD_URL=https://github.com/Bears-R-Us/arkouda/archive/refs/tags/v2022.10.13.zip
 export ARKOUDA_BRANCH_NAME=2022.10.13
+export DOCKER_REPO_NAME=hokiegeek2
 
 docker build --build-arg ARKOUDA_DISTRO_NAME=$ARKOUDA_DISTRO_NAME \
              --build-arg ARKOUDA_DOWNLOAD_URL=$ARKOUDA_DOWNLOAD_URL \
              --build-arg ARKOUDA_BRANCH_NAME=$ARKOUDA_BRANCH_NAME \
-             -f arkouda-smp-server -t hokiegeek2/arkouda-smp-server:$ARKOUDA_DISTRO_NAME 
+             -f arkouda-smp-server -t $DOCKER_REPO_NAME/arkouda-smp-server:$ARKOUDA_DISTRO_NAME 
 ```
 
 ## Running arkouda-smp-server
 
 ```
-docker run -it --rm -p 5555:5555 hokiegeek2/arkouda-smp-server:v20221013
+export DOCKER_REPO_NAME=hokiegeek2
+
+docker run -it --rm -p 5555:5555 $DOCKER_REPO_NAME/arkouda-smp-server:v20221013
 ```
 
 # chapel-gasnet-udp
@@ -59,8 +65,9 @@ While arkouda-smp-server extends [chapel-gasnet-smp](https://hub.docker.com/r/ch
 
 ```
 export CHPL_VERSION=1.27.0
+export DOCKER_REPO_NAME=hokiegeek2
 
-docker build --build-arg CHPL_VERSION=$CHPL_VERSION -f chapel-gasnet-udp -t hokiegeek2/chapel-gasnet-udp:$CHPL_VERSION .
+docker build --build-arg CHPL_VERSION=$CHPL_VERSION -f chapel-gasnet-udp -t $DOCKER_REPO_NAME/chapel-gasnet-udp:$CHPL_VERSION .
 ```
 
 # arkouda-udp-server
@@ -77,11 +84,12 @@ export ARKOUDA_DOWNLOAD_URL=https://github.com/Bears-R-Us/arkouda/archive/refs/t
 export ARKOUDA_BRANCH_NAME=2022.10.13
 export ARKOUDA_INTEGRATION_DOWNLOAD_URL=https://github.com/Bears-R-Us/arkouda-contrib/archive/refs/heads/main.zip
 export ARKOUDA_INTEGRATION_DISTRO_NAME=main
+export DOCKER_REPO_NAME=hokiegeek2
 
 docker build --build-arg ARKOUDA_DISTRO_NAME=$ARKOUDA_DISTRO_NAME \
              --build-arg ARKOUDA_DOWNLOAD_URL=$ARKOUDA_DOWNLOAD_URL \
              --build-arg ARKOUDA_INTEGRATION_DISTRO_NAME=$ARKOUDA_INTEGRATION_DISTRO_NAME \
              --build-arg ARKOUDA_BRANCH_NAME=$ARKOUDA_BRANCH_NAME \
              --build-arg ARKOUDA_INTEGRATION_DOWNLOAD_URL=$ARKOUDA_INTEGRATION_DOWNLOAD_URL \
-             -f Dockerfile -t hokiegeek2/arkouda-udp-server:$ARKOUDA_DISTRO_NAME .
+             -f Dockerfile -t $DOCKER_REPO_NAME/arkouda-udp-server:$ARKOUDA_DISTRO_NAME .
 ```
